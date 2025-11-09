@@ -1,7 +1,7 @@
 function renderBooks(filter) {
   const booksWrapper = document.querySelector(".books");
 
-  const books = getBooks();
+  const books = getBooks(); delete 
 
   if (filter === 'LOW_TO_HIGH') {
   console.log(filter)

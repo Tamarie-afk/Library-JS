@@ -53,14 +53,14 @@
             All <span class="purple">Books</span>
           </h2>
           <select name="filter" onchange="filterBooks(event)">
-            <option value="" disabled selected>Sort</OPtion>
+            <option value="" disabled selected>Sort</option>
             <option value="LOW_TO_HIGH">Price, Low to High</option>
             <option value="LOW_TO_HIGH">Price, High to Low</option>
             <option value="LOW_TO_HIGH">Rating</option>
           </select>
           </div>
           <div class="books">
-
+            <i class="fas fa-spinner books__loading--spinner"></i>
           </div>
         </div>
       </div>

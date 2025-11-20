@@ -1,6 +1,15 @@
-function renderBooks(filter) {
+let books;
+
+async function renderBooks(filter) {
   const booksWrapper = document.querySelector(".books");
-  const books = getBooks(); 
+
+  booksWrapper.body.classList += ' books__loading'
+  
+  if (!books) {
+    books = await getBooks();
+  }
+
+  booksWrapper.body.classList.remove(' books__loading')
 
   if (filter === 'LOW_TO_HIGH') {
   books.sort((a,b) => (a.salePrice || a.originalprice) - (b.salePrice || b.orininalprice));

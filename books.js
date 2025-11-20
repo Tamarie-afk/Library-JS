@@ -1,21 +1,18 @@
 function renderBooks(filter) {
   const booksWrapper = document.querySelector(".books");
-
   const books = getBooks(); 
 
-  console .log(filter);
   if (filter === 'LOW_TO_HIGH') {
-  books.sort((a,b) => a.originalprice - b.orininalprice);
+  books.sort((a,b) => (a.salePrice || a.originalprice) - (b.salePrice || b.orininalprice));
   }
   else if (filter === 'HIGH_TO_LOW') {
-    books.sort((a,b) => b.originalprice - a.orininalprice);
+    books.sort((a,b) => (b.salePrice || b.orininalprice) - (a.salePrice || a.originalprice));
   } 
   else if (filter === 'RATING') {
     books.sort((a,b) => b.rating - a.rating);
   }
 
-  const booksHtml = books
-    .map((book) => {
+  const booksHtml = books.map((book) => {
     return`<div class="book">
     <figure class="book__img--wrapper">
       <img class="book__img" src="${book.url}" alt="">
@@ -27,8 +24,8 @@ function renderBooks(filter) {
       ${ratingHTML(book.rating)}
     </div>
     <div class="book__price">
-      <span>$${book.originalPrice.toFixed(2)}</span> 
-    </div>
+      ${priceHTML(book.originalPrice, book.salePrice)}
+     </div>
   </div>`;
   })
   .join("");
@@ -36,6 +33,13 @@ function renderBooks(filter) {
   
 
   booksWrapper.innerHTML = booksHtml;
+}
+
+function priceHTML(originalPrice, salePrice) {
+  if (!salePrice) {
+    return `$${originalPrice.toFixed(2)}`
+  }
+    return `<span class="book__price--normal">$${originalPrice.toFixed(2)}</span> $${salePrice.toFixed(2)}`;
 }
 
 function ratingHTML(rating) {
@@ -151,4 +155,3 @@ function getBooks() {
     },
   ];
 }
-

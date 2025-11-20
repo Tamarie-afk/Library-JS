@@ -12,7 +12,8 @@ function renderBooks(filter) {
     books.sort((a,b) => b.rating - a.rating);
   }
 
-  const booksHtml = books.map((book) => {
+  const booksHtml = books
+  .map((book) => {
     return`<div class="book">
     <figure class="book__img--wrapper">
       <img class="book__img" src="${book.url}" alt="">
@@ -64,7 +65,9 @@ setTimeout(() => {
 });
 // FAKE DATA
 function getBooks() {
-  return [
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve([
     {
       id: 1,
       title: "Crack the Coding Interview",
@@ -153,5 +156,7 @@ function getBooks() {
       salePrice: null,
       rating: 4.5,
     },
-  ];
+  ]);
+}, 1000);
+  });
 }
